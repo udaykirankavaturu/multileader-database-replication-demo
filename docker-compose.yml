@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  couchdb1:
+    image: couchdb:3
+    container_name: couchdb1
+    ports:
+      - "5984:5984"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=admin
+    volumes:
+      - couchdb1-data:/opt/couchdb/data
+    networks:
+      - couchdb-network
+
+  couchdb2:
+    image: couchdb:3
+    container_name: couchdb2
+    ports:
+      - "5985:5984"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=admin
+    volumes:
+      - couchdb2-data:/opt/couchdb/data
+    networks:
+      - couchdb-network
+
+volumes:
+  couchdb1-data:
+  couchdb2-data:
+
+networks:
+  couchdb-network:
+    driver: bridge
